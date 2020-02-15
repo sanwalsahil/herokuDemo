@@ -10,7 +10,7 @@ scikit-learn>=0.18
 matplotlib>=1.4.3
 pandas>=0.19
 tensorflow==2.0.0b0
-cv2==4.2.0
+OpenCv==4.2.0
 cudatoolkit==10.0.130
 cudnn==7.6.5
 
