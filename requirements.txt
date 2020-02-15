@@ -1,3 +1,4 @@
+re
 requests
 opencv-contrib-python-headless
 opencv-python==4.2.0.32

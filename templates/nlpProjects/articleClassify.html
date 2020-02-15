@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Machine Learning Projects</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body class="subpage">
+<!-- Header -->
+<header id="header">
+    <div class="logo"><a href="/">My Ai Projects</span></a></div>
+<!--    <a href="#menu">Menu</a>-->
+</header>
+
+
+<section id="One" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <p>Classify Articles Based On Their Text</p>
+            <h2>My Natural Language Processing Projects</h2>
+        </header>
+    </div>
+</section>
+
+<div id="main" class="container">
+    <h2 id="elements">Text Classification In NLP</h2>
+    <p style="background-color:green;color:white;font-size:24px">{{ prediction_text }}</p>
+    <div class="row 200%">
+        <div class="6u 12u$(medium)">
+            <h3>Overview</h3>
+            <p>
+                This dataset is created by Mohan S Acharya to estimate chances of graduate admission from an Indian perspective. Our analysis will help us in understand what factors are important in graduate admissions and how these factors are interrelated among themselves. It will also help predict one's chances of admission given the rest of the variables.
+            </p>
+            <a target="_blank" href="https://www.kaggle.com/mohansacharya/graduate-admissions" class="button alt" style="margin-top:10px">Link To Dataset</a>
+            <a target="_blank" href="https://github.com/sanwalsahil/grad_admissions/blob/master/Admission_Predict.csv" class="button alt" style="margin-top:10px">Download Test Data For Demo</a>
+            <a target="_blank" href="https://github.com/sanwalsahil/grad_admissions" class="button alt" style="margin-top:10px">Link To GitHub Repo</a>
+            <br>
+
+        </div>
+        <div class="6u 12u$(medium)">
+        </div>
+
+        <div class="6u 12u$(medium)">
+            <h3>Demo</h3>
+            <form method="post" action="{{url_for('article_predict')}}">
+                <div class="row uniform">
+<!--                    <div class="6u 12u$(xsmall)">-->
+<!--                        <input type="text" required name="gre" id="gre" value="" placeholder="GRE Score (out of 340 )" />-->
+<!--                    </div>-->
+
+                    <div class="12u$">
+                        <textarea name="message" id="message" placeholder="Enter your message" rows="6"></textarea>
+                    </div>
+
+                    <!-- Break -->
+
+
+                    <!-- Break -->
+                    <div class="12u$">
+                        <ul class="actions">
+                            <li><input type="submit" value="Submit" /></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="6u 12u$(medium)">
+        </div>
+    </div>
+
+
+</div>
+</html>

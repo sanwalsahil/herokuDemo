@@ -8,7 +8,7 @@ import math
 #import keras
 import cv2
 from flask import Flask, request, jsonify, render_template, send_file, send_from_directory
-from werkzeug import secure_filename
+#from werkzeug import secure_filename
 from pathlib import Path
 import pickle
 import pandas as pd
@@ -40,6 +40,10 @@ def mlProjIndex():
 @app.route('/dlProjIndex')
 def dlProjIndex():
     return render_template('dlProjects/index.html')
+
+@app.route('/nlpProjIndex')
+def nlpProjIndex():
+    return render_template('nlpProjects/index.html')
 
 
 ###############################################################################################
@@ -148,6 +152,68 @@ def predict():
 
     return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
 
+
+###########################################################################################################
+######################################### NLP PROJECTS ####################################################
+###########################################################################################################
+#------------------- BBC ARTICLE CLASSIFICATION --------------------------#
+@app.route('/articleClassify')
+def articleClassify():
+    return render_template('nlpProjects/articleClassify.html')
+
+@app.route('/article_predict',methods=['POST'])
+def article_predict():
+
+    import re
+
+    text = [x for x in request.form.values()]
+    text = text[0]
+#D:\herokuDemo\savedModels\nlp\articleClassification
+    with open('savedModels/nlp/articleClassification/leEnc.pkl', 'rb') as file:
+        print(file)
+        leEnc = pickle.load(file)
+
+    with open('savedModels/nlp/articleClassification/tvEnc.pkl', 'rb') as file:
+        print(file)
+        tvEnc = pickle.load(file)
+
+    with open('savedModels/nlp/articleClassification/stop_words.pkl', 'rb') as file:
+        print(file)
+        stop_words = pickle.load(file)
+
+    with open('savedModels/nlp/articleClassification/stemmer.pkl', 'rb') as file:
+        print(file)
+        stemmer = pickle.load(file)
+
+    with open('savedModels/nlp/articleClassification/lemmatizer.pkl', 'rb') as file:
+        print(file)
+        lemmatizer = pickle.load(file)
+
+    with open('savedModels/nlp/articleClassification/classModel', 'rb') as file:
+        print(file)
+        model = pickle.load(file)
+
+    def preprocess(text):
+        text = text.lower()
+        text = re.sub('[^a-zA-Z ]', '', text)
+        # removing stop words
+        wordsList = text.split()
+        newWordsList = []
+        for word in wordsList:
+            if word not in stop_words:  # remove stop words
+                word = stemmer.stem(word)  # using porter stemmer
+                word = lemmatizer.lemmatize(word)
+                newWordsList.append(word)
+
+        return " ".join(newWordsList)
+
+    preData = preprocess(text)
+    finalSample = tvEnc.transform([preData])
+    result = model.predict(finalSample)
+    #3 = > sport, 4 = > tech, 0 = > business, 1 = > entertainment, 2 = > politics
+    catList = ['Business','Entertainment','Politics','Sport','Technology']
+
+    return render_template('nlpProjects/articleClassify.html', prediction_text=' Article belongs to '+catList[result[0]]+' category.')
 #######################################################################################################################
 ############################# CONPUTER VISION #############################
 ###########################################################################
@@ -190,7 +256,7 @@ def detectMove():
                                                         prevPts,
                                                         None,
                                                         **lk_params)
-
+        '''
         good_new = nextPts[status == 1]
         good_prev = prevPts[status == 1]
         #move = False
@@ -221,6 +287,7 @@ def detectMove():
         if move==True:
             cv2.putText(frame, text='Movement Detected', org=(50, 400), fontFace=font, fontScale=2,
                     color=(255, 255, 255), thickness=4, lineType=cv2.LINE_AA)
+        '''
         img = cv2.add(frame, mask)
         cv2.imshow('tracking', img)
 
@@ -234,8 +301,8 @@ def detectMove():
         if k == 27:
             break
 
-        prev_gray = frame_gray.copy()
-        prevPts = good_new.reshape(-1, 1, 2)
+        #prev_gray = frame_gray.copy()
+        #prevPts = good_new.reshape(-1, 1, 2)
 
     cv2.destroyAllWindows()
     cap.release()
@@ -243,5 +310,5 @@ def detectMove():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=8080)
-    #app.run(debug=True)
+    #app.run(host='0.0.0.0',port=8080)
+    app.run(debug=True)
