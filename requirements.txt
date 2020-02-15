@@ -1,3 +1,4 @@
+requests
 opencv-contrib-python-headless
 opencv-python==4.2.0.32
 Flask==1.1.1
