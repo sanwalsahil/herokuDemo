@@ -77,16 +77,16 @@ def grad_predict():
     df = pd.read_csv('Data/ml/grad_adm/Admission_Predict.csv')
     X = df.iloc[:, 1:8]
 
-    from sklearn.preprocessing import OneHotEncoder
-    enc = OneHotEncoder(categorical_features=[6])
-    X = enc.fit_transform(X).toarray()
+    #from sklearn.preprocessing import OneHotEncoder
+    #enc = OneHotEncoder(categorical_features=[6])
+    #X = enc.fit_transform(X).toarray()
 
     from sklearn.preprocessing import StandardScaler
     scaler = StandardScaler()
-    X = scaler.fit(X)
+    #X = scaler.fit(X)
 
 
-    dfFeat = scaler.transform(dfFeat)
+    dfFeat = scaler.fit_transform(dfFeat)
 
     dfFeat = pd.DataFrame(dfFeat)
     
