@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>lo by TEMPLATED</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header" class="alt">
+				<div class="logo"><a href="index.html">My Ai Projects</a></div>
+				<a href="#menu">Menu</a>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="generic.html">Generic</a></li>
+					<li><a href="{{url_for('elements')}}">Elements</a></li>
+				</ul>
+			</nav>
+
+		<!-- Banner -->
+			<section class="banner full">
+				<article>
+
+					<img src="{{ url_for('static', filename='images/templateLook/slide01.jpg') }}">
+					<div class="inner">
+						<header>
+							<p>The key to artificial intelligence has always been the representation.</p>
+							<h2>Jeff Hawkins</h2>
+						</header>
+					</div>
+				</article>
+				<article>
+
+					<img src="{{ url_for('static', filename='images/templateLook/slide02.jpg') }}">
+					<div class="inner">
+						<header>
+							<p>A year spent in artificial intelligence is enough to make one believe in God.</p>
+							<h2>Alan Perlis</h2>
+						</header>
+					</div>
+				</article>
+				<article>
+
+					<img src="{{ url_for('static', filename='images/templateLook/slide03.jpg') }}">
+					<div class="inner">
+						<header>
+							<p>Is artificial intelligence less than our intelligence?</p>
+							<h2>Spike Jonze</h2>
+						</header>
+					</div>
+				</article>
+				<article>
+
+					<img src="{{ url_for('static', filename='images/templateLook/slide04.jpg') }}">
+					<div class="inner">
+						<header>
+							<p>Our intelligence is what makes us human, and AI is an extension of that quality</p>
+							<h2>Yann LeCunn</h2>
+						</header>
+					</div>
+				</article>
+				<article>
+
+					<img src="{{ url_for('static', filename='images/templateLook/slide05.jpg') }}">
+					<div class="inner">
+						<header>
+							<p>As a technologist, I see how AI and the fourth industrial revolution will impact every aspect of people’s lives</p>
+							<h2>Fei-Fei Li</h2>
+						</header>
+					</div>
+				</article>
+			</section>
+
+		<!-- One -->
+			<section id="one" class="wrapper style2">
+				<div class="inner">
+					<div class="grid-style">
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+
+									<img src="{{ url_for('static', filename='images/templateLook/pic02.jpg') }}">
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p>“Machine learning will automate jobs that most people thought could only be done by people.” ~Dave Waters</p>
+										<h2>My Machine Learning Projects</h2>
+									</header>
+									<p> </p>
+									<footer class="align-center">
+										<a href="{{ url_for('mlProjIndex') }}" class="button alt">Discover</a>
+									</footer>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+
+									<img src="{{ url_for('static', filename='images/templateLook/pic03.jpg') }}">
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p>"Imaginations bring order out of chaos. Deep learning with deep imagination is the road map to AI springs and AI autumns." - Amit Ray</p>
+										<h2>My Deep Learning Projects</h2>
+									</header>
+									<p></p>
+									<footer class="align-center">
+										<a href="{{ url_for('dlProjIndex') }}" class="button alt">Discover</a>
+									</footer>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+		<!-- Two -->
+			<section id="two" class="wrapper style3">
+				<div class="inner">
+					<header class="align-center">
+						<p>Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
+						<h2>Morbi maximus justo</h2>
+					</header>
+				</div>
+			</section>
+
+		<!-- Three -->
+			<!--<section id="three" class="wrapper style2">-->
+				<!--<div class="inner">-->
+					<!--<header class="align-center">-->
+						<!--<p class="special">Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>-->
+						<!--<h2>Morbi maximus justo</h2>-->
+					<!--</header>-->
+					<!--<div class="gallery">-->
+						<!--<div>-->
+							<!--<div class="image fit">-->
+								<!--<a href="#"><img src="images/pic01.jpg" alt="" /></a>-->
+							<!--</div>-->
+						<!--</div>-->
+						<!--<div>-->
+							<!--<div class="image fit">-->
+								<!--<a href="#"><img src="images/pic02.jpg" alt="" /></a>-->
+							<!--</div>-->
+						<!--</div>-->
+						<!--<div>-->
+							<!--<div class="image fit">-->
+								<!--<a href="#"><img src="images/pic03.jpg" alt="" /></a>-->
+							<!--</div>-->
+						<!--</div>-->
+						<!--<div>-->
+							<!--<div class="image fit">-->
+								<!--<a href="#"><img src="images/pic04.jpg" alt="" /></a>-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</section>-->
+
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+					</ul>
+				</div>
+				<div class="copyright">
+					&copy; Untitled. All rights reserved.
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+
+
+			<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/skel.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+	</body>
+</html>
