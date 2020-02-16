@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Machine Learning Projects</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body class="subpage">
+<!-- Header -->
+<header id="header">
+    <div class="logo"><a href="/">My Ai Projects</span></a></div>
+<!--    <a href="#menu">Menu</a>-->
+</header>
+
+<!-- One -->
+<section id="One" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <p>Predict Butterfly Species From Image</p>
+            <h2>My Machine Learning Projects</h2>
+        </header>
+    </div>
+</section>
+
+<div id="main" class="container">
+    <h2 id="elements">Butterfly Image Classification</h2>
+    <p style="background-color:green;color:white;font-size:24px">{{ prediction_text }}</p>
+    <div class="row 200%">
+        <div class="6u 12u$(medium)">
+            <h3>Overview</h3>
+            <p>
+                Classify Butterfly Images and predict their species.
+            </p>
+            <a target="_blank" href="https://www.kaggle.com/puneet6060/intel-image-classification" class="button alt" style="margin-top:10px">Link To Dataset</a>
+            <a target="_blank" href="https://www.kaggle.com/puneet6060/intel-image-classification" class="button alt" style="margin-top:10px">Link To Kaggle kernel</a>
+            <!--<a target="_blank" href="https://github.com/sanwalsahil/grad_admissions/blob/master/Admission_Predict.csv" class="button alt" style="margin-top:10px">Download Test Data For Demo</a>-->
+            <a target="_blank" href="https://github.com/sanwalsahil/grad_admissions" class="button alt" style="margin-top:10px">Link To GitHub Repo</a>
+            <br>
+
+        </div>
+        <div class="6u 12u$(medium)">
+        </div>
+
+        <div class="6u 12u$(medium)">
+            <h3>Demo</h3>
+            <h3>Please upload an image and click submit</h3>
+            <form method="post" action="{{url_for('butterfly_pred')}}" enctype = "multipart/form-data">
+                <div class="row uniform">
+                    <div class="6u 12u$(xsmall)">
+                        <input type="file" required name="file" id="gre"  />
+                    </div>
+
+
+                    <!-- Break -->
+
+
+                    <!-- Break -->
+                    <div class="12u$">
+                        <ul class="actions">
+                            <li><input type="submit" value="Submit" /></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="6u 12u$(medium)">
+        </div>
+    </div>
+
+
+</div>
+</html>

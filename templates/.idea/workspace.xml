@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26263c8d-6af3-47c0-beb5-fe60722d2b03" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/dlProjects/butterflyClassify.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nlpProjects/articleClassify.html" beforeDir="false" afterPath="$PROJECT_DIR$/nlpProjects/articleClassify.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dlProjects/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dlProjects/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,11 +59,18 @@
       <updated>1578297182221</updated>
       <workItem from="1578297186268" duration="601000" />
       <workItem from="1578662104237" duration="17433000" />
-      <workItem from="1581753623184" duration="3732000" />
+      <workItem from="1581753623184" duration="4332000" />
+      <workItem from="1581834027169" duration="1075000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1581834028117">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1581834028117" />
   </component>
 </project>

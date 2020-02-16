@@ -126,7 +126,7 @@ def intel_pred():
         f.filename = 'image'+ext
         model_intel = tf.keras.models.load_model("testing.h5")
 
-        f.save(secure_filename(f.filename))
+        f.save(f.filename)
         image = cv2.imread(f.filename)
         image = cv2.resize(image, (150, 150))
         image = np.array(image)
@@ -138,6 +138,56 @@ def intel_pred():
         #class_code = model_intel.predict((image, tf.float32))[0].argsort()[-5:][::-1]
         res = labels[class_code]
         return render_template('dlProjects/intelClassify.html',prediction_text='image given is of  {}'.format(res))
+
+#----------------------------------#
+#--------- butterfly classify -----#
+#----------------------------------#
+@app.route('/butterflyClassify')
+def butterflyClassify():
+    return render_template('dlProjects/butterflyClassify.html')
+
+
+@app.route('/butterfly_pred', methods=['GET', 'POST'])
+def butterfly_pred():
+    if request.method == 'POST':
+        f = request.files['file']
+        ext = Path(f.filename).suffix
+        f.filename = 'image' + ext
+        model = tf.keras.models.load_model("savedModels/dl/my_model.h5")
+        #D:\herokuDemo\savedModels\dl
+        f.save(f.filename)
+
+        def imageWork(location):
+            image = cv2.imread(location)
+            image = cv2.resize(image, (120, 120))
+            image = image / 255
+            image = np.array(image)
+            image = np.reshape(image, (1, 120, 120, 3))
+            print(image.shape)
+            print(image.max())
+            print(type(image))
+            return image
+
+        image = imageWork(f.filename)
+
+        species = {7: 'Giant Swallowtail',
+                   2: 'Zebra Longwing',
+                   6: 'Mourning Cloak',
+                   3: 'Crimson-patched Longwing',
+                   5: 'American Copper',
+                   0: 'Painted Lady',
+                   9: 'Red Admiral',
+                   4: 'Common Buckeye',
+                   8: 'Cabbage White',
+                   1: 'Monarch'}
+
+        res = model.predict(image)
+        #return render_template('dlProjects/butterflyClassify.html', prediction_text=image.shape)
+        #type(res[0])
+        val = np.argmax(res[0])
+        result = species[val]
+
+        return render_template('dlProjects/butterflyClassify.html', prediction_text='image of butterfly given belongs to '+result+' species.')
 
 @app.route('/predict',methods=['POST'])
 def predict():
