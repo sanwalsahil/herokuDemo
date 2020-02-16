@@ -189,6 +189,45 @@ def butterfly_pred():
 
         return render_template('dlProjects/butterflyClassify.html', prediction_text='image of butterfly given belongs to '+result+' species.')
 
+#---------------------------------------------------------------------------------------#
+#--------------------------- FLOWER CLASSIFICATION -------------------------------------#
+#---------------------------------------------------------------------------------------#
+
+@app.route('/flowerClassify')
+def flowerClassify():
+    return render_template('dlProjects/flowerClassify.html')
+
+@app.route('/flower_pred', methods=['GET', 'POST'])
+def flower_pred():
+    if request.method == 'POST':
+        f = request.files['file']
+        ext = Path(f.filename).suffix
+        f.filename = 'image' + ext
+        model = tf.keras.models.load_model("savedModels/dl/flowerDetection/my_model.h5")
+        #D:\herokuDemo\savedModels\dl
+        f.save(f.filename)
+
+        def imageWork(location):
+            image = cv2.imread(location)
+            image = cv2.resize(image, (120, 120))
+            image = image / 255
+            image = np.array(image)
+            image = np.reshape(image, (1, 120, 120, 3))
+
+            return image
+
+        image = imageWork(f.filename)
+
+        species = ['Tulip', 'Daisy', 'Sunflower', 'Rose', 'Dandelion']
+
+        res = model.predict(image)
+        #return render_template('dlProjects/butterflyClassify.html', prediction_text=image.shape)
+        #type(res[0])
+        val = np.argmax(res[0])
+        result = species[val]
+
+        return render_template('dlProjects/butterflyClassify.html', prediction_text='Image of flower given belongs to '+result+' Category.')
+
 @app.route('/predict',methods=['POST'])
 def predict():
     '''
