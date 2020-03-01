@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Machine Learning Projects</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite; /* Safari */
+      animation: spin 2s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    </style>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"></script>
+</head>
+<body class="subpage">
+<!-- Header -->
+<header id="header">
+    <div class="logo"><a href="/">My Ai Projects</span></a></div>
+<!--    <a href="#menu">Menu</a>-->
+</header>
+
+
+<section id="One" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <p>Classify Articles Based On Their Text</p>
+            <h2>My Natural Language Processing Projects</h2>
+        </header>
+    </div>
+</section>
+<div id="allLoader" style="display:none;background-color: #000000b8;padding: 15px;">
+    <p style="text-align: center;font-size: 24px;font-weight: 900;color: white;">Please Wait (do not refresh)</p>
+<div style="margin-left:45%" class="loader"></div>
+</div>
+<div id="main" class="container">
+    <h2 id="elements">Text Classification In NLP</h2>
+    <p style="background-color:green;color:white;font-size:24px">{{ prediction_text }}</p>
+    <div class="row 200%">
+        <div class="6u 12u$(medium)">
+            <h3>Overview</h3>
+            <p>In this project we can classify text to see whether it is disaster related or not</p>
+            <p>For example a tweet such as "millions of lives effected because of disaster" is a
+            disaster related tweet while a tweet such as - "Avengers releasing tonight" is a tweet not
+            related to disaster.</p>
+            <p>For testing please enter a text in box on the right and press submit</p>
+
+            <a target="_blank" href="https://www.kaggle.com/c/nlp-getting-started/data" class="button alt" style="margin-top:10px">Link To Dataset</a>
+            <a target="_blank" href="https://www.kaggle.com/sanwalsahil/text-classification-acc-80/" class="button alt" style="margin-top:10px">Link To Kaggle Kernel</a>
+            <a target="_blank" href="https://github.com/sanwalsahil/disasterTweetDetection" class="button alt" style="margin-top:10px">Link To GitHub Repo</a>
+            <br>
+
+        </div>
+        <div class="6u 12u$(medium)">
+        </div>
+
+        <div class="6u 12u$(medium)">
+            <h3>Demo</h3>
+            <form method="post" action="{{url_for('disasterTweet_predict')}}">
+                <div class="row uniform">
+<!--                    <div class="6u 12u$(xsmall)">-->
+<!--                        <input type="text" required name="gre" id="gre" value="" placeholder="GRE Score (out of 340 )" />-->
+<!--                    </div>-->
+
+                    <div class="12u$">
+                        <textarea name="message" id="message" placeholder="Enter Article Content Here And Press Submit" rows="6"></textarea>
+                    </div>
+
+                    <!-- Break -->
+
+
+                    <!-- Break -->
+                    <div class="12u$">
+                        <ul class="actions">
+                            <li><input type="submit" value="Submit" onclick="$('#allLoader').show()"/></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="6u 12u$(medium)">
+        </div>
+    </div>
+
+
+</div>
+</html>

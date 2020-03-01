@@ -2,13 +2,8 @@
 import numpy as np
 import tensorflow as tf
 import math
-#from keras.models import load_model
-#from keras.utils import CustomObjectScope
-#from keras.initializers import glorot_uniform
-#import keras
 import cv2
 from flask import Flask, request, jsonify, render_template, send_file, send_from_directory
-#from werkzeug import secure_filename
 from pathlib import Path
 import pickle
 import pandas as pd
@@ -226,7 +221,7 @@ def flower_pred():
         val = np.argmax(res[0])
         result = species[val]
 
-        return render_template('dlProjects/butterflyClassify.html', prediction_text='Image of flower given belongs to '+result+' Category.')
+        return render_template('dlProjects/flowerClassify.html', prediction_text='Image of flower given belongs to '+result+' Category.')
 
 @app.route('/predict',methods=['POST'])
 def predict():
@@ -259,27 +254,21 @@ def article_predict():
     text = text[0]
 #D:\herokuDemo\savedModels\nlp\articleClassification
     with open('savedModels/nlp/articleClassification/leEnc.pkl', 'rb') as file:
-        print(file)
         leEnc = pickle.load(file)
 
     with open('savedModels/nlp/articleClassification/tvEnc.pkl', 'rb') as file:
-        print(file)
         tvEnc = pickle.load(file)
 
     with open('savedModels/nlp/articleClassification/stop_words.pkl', 'rb') as file:
-        print(file)
         stop_words = pickle.load(file)
 
     with open('savedModels/nlp/articleClassification/stemmer.pkl', 'rb') as file:
-        print(file)
         stemmer = pickle.load(file)
 
     with open('savedModels/nlp/articleClassification/lemmatizer.pkl', 'rb') as file:
-        print(file)
         lemmatizer = pickle.load(file)
 
     with open('savedModels/nlp/articleClassification/classModel', 'rb') as file:
-        print(file)
         model = pickle.load(file)
 
     def preprocess(text):
@@ -303,6 +292,107 @@ def article_predict():
     catList = ['Business','Entertainment','Politics','Sport','Technology']
 
     return render_template('nlpProjects/articleClassify.html', prediction_text=' Article belongs to '+catList[result[0]]+' category.')
+
+#------------------- BBC ARTICLE CLASSIFICATION --------------------------#
+@app.route('/disasterTweet')
+def disasterTweet():
+    return render_template('nlpProjects/disasterTweet.html')
+
+@app.route('/disasterTweet_predict',methods=['POST'])
+def disasterTweet_predict():
+    import re
+    from bs4 import BeautifulSoup
+    from nltk import word_tokenize
+    import string
+    from nltk.corpus import stopwords
+    from nltk import WordNetLemmatizer
+
+    def remove_emoji(text):
+        emoji_pattern = re.compile("["
+                                   u"\U0001F600-\U0001F64F"  # emoticons
+                                   u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+                                   u"\U0001F680-\U0001F6FF"  # transport & map symbols
+                                   u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+                                   u"\U00002702-\U000027B0"
+                                   u"\U000024C2-\U0001F251"
+                                   "]+", flags=re.UNICODE)
+        return emoji_pattern.sub(r'', text)
+
+    def remove_url(text):
+        # remove urls
+        url = re.compile(r'https?://\S+|www\.\S+')
+        return url.sub(r'', text)
+
+    def remove_html(w):
+        soup = BeautifulSoup(w)
+        text = soup.get_text()
+        return w
+
+    def cleanData(data):
+        # remove urls
+        data['text'] = data['text'].apply(lambda x: remove_url(x))
+
+        # remove emojis
+        data['text'] = data['text'].apply(lambda x: remove_emoji(x))
+
+        # tokenizing words
+        data['text'] = data['text'].apply(lambda x: word_tokenize(x))
+
+        # convert all text to lowercase
+        data['text'] = data['text'].apply(lambda x: [w.lower() for w in x])
+
+        # remove html tags
+        data['text'] = data['text'].apply(lambda x: [remove_html(w) for w in x])
+
+        # prepare regex for char filtering
+        re_punc = re.compile('[%s]' % re.escape(string.punctuation))
+
+        # removing puncutations
+        data['text'] = data['text'].apply(lambda x: [re_punc.sub('', w) for w in x])
+
+        # removing non alphabetic words
+        data['text'] = data['text'].apply(lambda x: [w for w in x if w.isalpha()])
+
+        # removing stopwords
+        data['text'] = data['text'].apply(lambda x: [w for w in x if w not in stopwords.words('english')])
+
+        # removing short words
+        data['text'] = data['text'].apply(lambda x: [w for w in x if len(w) > 2])
+        return data
+
+    text = [x for x in request.form.values()]
+    text = text[0]
+
+    dataTrial = pd.DataFrame([text], columns=['text'])
+    dataTrial = cleanData(dataTrial)
+
+    lem = WordNetLemmatizer()
+    dataTrial['text'] = dataTrial['text'].apply(lambda x: [lem.lemmatize(w) for w in x])
+    dataTrial['text'] = dataTrial['text'].apply(lambda x: ' '.join(x))
+
+    with open('savedModels/nlp/disasterTweetClassification/regModel', 'rb') as file:
+        model = pickle.load(file)
+
+    with open('savedModels/nlp/disasterTweetClassification/tfidfFit', 'rb') as file:
+        tfidf = pickle.load(file)
+
+    Xtest = dataTrial['text']
+    Xtest = tfidf.transform(Xtest)
+    Xtest = Xtest.toarray()
+    y_pred = model.predict(Xtest)[0]
+
+    if y_pred == 1:
+        msg = 'Tweet is disaster related'
+    else:
+        msg = 'Tweet is not related to disaster'
+
+
+
+    return render_template('nlpProjects/disasterTweet.html',prediction_text=msg)
+
+
+
+
 #######################################################################################################################
 ############################# CONPUTER VISION #############################
 ###########################################################################

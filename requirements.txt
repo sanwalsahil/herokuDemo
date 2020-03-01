@@ -1,3 +1,6 @@
+re
+bs4
+string
 nltk
 requests
 opencv-contrib-python-headless
