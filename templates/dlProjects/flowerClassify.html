@@ -6,6 +6,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite; /* Safari */
+      animation: spin 2s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    </style>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"></script>
 </head>
 <body class="subpage">
 <!-- Header -->
@@ -24,6 +50,11 @@
     </div>
 </section>
 
+<div id="allLoader" style="display:none;background-color: #000000b8;padding: 15px;">
+    <p style="text-align: center;font-size: 24px;font-weight: 900;color: white;">Please Wait (do not refresh)</p>
+<div style="margin-left:45%" class="loader"></div>
+</div>
+
 <div id="main" class="container">
     <h2 id="elements">Flower Image Classification</h2>
     <p style="background-color:green;color:white;font-size:24px">{{ prediction_text }}</p>
@@ -37,7 +68,7 @@
             2. Daisy<br>
             3. Sunflower <br>
             4. Rose <br>
-            5. Dandelion
+            5. Dandelion<br>
             <a target="_blank" href="https://www.kaggle.com/alxmamaev/flowers-recognition" class="button alt" style="margin-top:10px">Link To Dataset</a>
             <a target="_blank" href="https://www.kaggle.com/sanwalsahil/kernel2edce4312c" class="button alt" style="margin-top:10px">Link To Kaggle kernel</a>
             <a target="_blank" href="https://github.com/sanwalsahil/flowerDetection" class="button alt" style="margin-top:10px">Link To GitHub Repo</a>
@@ -63,7 +94,7 @@
                     <!-- Break -->
                     <div class="12u$">
                         <ul class="actions">
-                            <li><input type="submit" value="Submit" /></li>
+                            <li><input type="submit" value="Submit" onclick="$('#allLoader').show()"/></li>
 
                         </ul>
                     </div>

@@ -64,39 +64,52 @@ def grad_predict():
 
     if int_features[6] == 1.0:
         del int_features[6]
-        int_features.insert(0, 0)
-        int_features.insert(1, 1)
+        # int_features.insert(0, 0)
+        # int_features.insert(1, 1)
+        int_features.append(0)
+        int_features.append(1)
     else:
         del int_features[6]
-        int_features.insert(0, 1)
-        int_features.insert(1, 0)
+        # int_features.insert(0, 1)
+        # int_features.insert(1, 0)
+        int_features.append(1)
+        int_features.append(0)
 
     dfFeat = pd.DataFrame(int_features).transpose()
+    #D:\herokuDemo\savedModels\ml\grad_adm
+    with open('savedModels/ml/grad_adm/ssFit.pkl', 'rb') as file:
 
-    df = pd.read_csv('Data/ml/grad_adm/Admission_Predict.csv')
-    X = df.iloc[:, 1:8]
+        scaler = pickle.load(file)
+
+
+
+    #df = pd.read_csv('Data/ml/grad_adm/Admission_Predict.csv')
+    #X = df.iloc[:, 1:8]
 
     #from sklearn.preprocessing import OneHotEncoder
     #enc = OneHotEncoder(categorical_features=[6])
     #X = enc.fit_transform(X).toarray()
 
-    from sklearn.preprocessing import StandardScaler
-    scaler = StandardScaler()
+    #from sklearn.preprocessing import StandardScaler
+    #scaler = StandardScaler()
     #X = scaler.fit(X)
 
-
-    dfFeat = scaler.fit_transform(dfFeat)
+    # return render_template('mlProjects/graduateAdmissions.html',
+    #                        prediction_text='With Provided Data Your Chances Of Getting Admission is  {}'.format(
+    #                            dfFeat))
+    dfFeat = scaler.transform(dfFeat)
 
     dfFeat = pd.DataFrame(dfFeat)
     
     pkl_Filename = 'savedModels/ml/grad_adm/regModel'
 
 
-    with open('regModel', 'rb') as file:
+    with open('savedModels/ml/grad_adm/regModel', 'rb') as file:
 
         Pickled_LR_Model = pickle.load(file)
 
-    prediction = round(Pickled_LR_Model.predict(dfFeat)[0][0]*100,2)
+    prediction = round(Pickled_LR_Model.predict(dfFeat)[0]*100,2)
+    #prediction = Pickled_LR_Model.predict(dfFeat)
 
     return render_template('mlProjects/graduateAdmissions.html',prediction_text='With Provided Data Your Chances Of Getting Admission is  {}'.format(prediction))
 

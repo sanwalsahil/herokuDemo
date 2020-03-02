@@ -10,12 +10,16 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <script
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"></script>
     </head>
     <body class="subpage">
     <!-- Header -->
     <header id="header">
         <div class="logo"><a href="/">My Ai Projects</span></a></div>
-        <a href="#menu">Menu</a>
+{#        <a href="#menu">Menu</a>#}
     </header>
 
     <!-- Nav -->
@@ -36,10 +40,14 @@
             </header>
         </div>
     </section>
+    <div id="allLoader" style="display:none;background-color: #000000b8;padding: 15px;">
+    <p style="text-align: center;font-size: 24px;font-weight: 900;color: white;">Please Wait (do not refresh)</p>
+<div style="margin-left:45%" class="loader"></div>
+</div>
 
     <div id="main" class="container">
         <h2 id="elements">Graduate Admissions</h2>
-        <p style="background-color:green;color:white;font-size:24px">{{ prediction_text }}</p>
+        <p style="background-color:green;color:white;font-size:24px;text-align:center">{{ prediction_text }}</p>
         <div class="row 200%">
             <div class="6u 12u$(medium)">
                 <h3>Overview</h3>
@@ -49,6 +57,7 @@
                 <a target="_blank" href="https://www.kaggle.com/mohansacharya/graduate-admissions" class="button alt" style="margin-top:10px">Link To Dataset</a>
                 <a target="_blank" href="https://github.com/sanwalsahil/grad_admissions/blob/master/Admission_Predict.csv" class="button alt" style="margin-top:10px">Download Test Data For Demo</a>
                 <a target="_blank" href="https://github.com/sanwalsahil/grad_admissions" class="button alt" style="margin-top:10px">Link To GitHub Repo</a>
+                <a target="_blank" href="https://www.kaggle.com/sanwalsahil/kernel7ff5ca052f" class="button alt" style="margin-top:10px">Link To Kaggle Kernel</a>
                 <br>
 
                 </div>
@@ -103,7 +112,7 @@
                         <!-- Break -->
                         <div class="12u$">
                             <ul class="actions">
-                                <li><input type="submit" value="Submit" /></li>
+                                <li><input type="submit" value="Submit" onclick="$('#allLoader').show()"/></li>
 
                             </ul>
                         </div>
